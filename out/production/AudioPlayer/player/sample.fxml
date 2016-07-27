@@ -5,11 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.Controller">
+
+<BorderPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.Controller">
     <center>
-      <VBox>
+      <VBox prefHeight="80.0">
          <children>
-            <Label fx:id="name" text="Name" />
+            <Label fx:id="name" />
               <StackPane>
                   <children>
                       <ProgressBar fx:id="progressBar" prefWidth="500.0" progress="0.0" />
@@ -18,11 +19,24 @@
               </StackPane>
             <BorderPane>
                <left>
-                  <Label fx:id="time" BorderPane.alignment="CENTER" />
+                  <Label fx:id="time" BorderPane.alignment="TOP_CENTER" />
                </left>
                <right>
-                  <Label fx:id="fullTime" BorderPane.alignment="CENTER" />
+                  <Label fx:id="fullTime" BorderPane.alignment="TOP_CENTER" />
                </right>
+               <center>
+                  <HBox alignment="CENTER" spacing="2.0" BorderPane.alignment="CENTER">
+                     <children>
+                            <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" prefWidth="50.0" text="Play" />
+                            <Button fx:id="stopButton" mnemonicParsing="false" onAction="#stop" prefWidth="50.0" text="Stop" />
+                        <Button fx:id="prevButton" mnemonicParsing="false" onAction="#prev" prefWidth="50.0" text="Prev" />
+                        <Button fx:id="nextButton" mnemonicParsing="false" onAction="#next" prefWidth="50.0" text="Next" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets top="5.0" />
+                     </BorderPane.margin>
+                  </HBox>
+               </center>
             </BorderPane>
          </children>
          <BorderPane.margin>
@@ -31,31 +45,35 @@
       </VBox>
     </center>
     <left>
-        <VBox spacing="5.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="90.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="play" mnemonicParsing="false" onAction="#play" prefWidth="60.0" text="Play" />
-                <Button fx:id="stop" mnemonicParsing="false" onAction="#stop" prefWidth="60.0" text="Stop" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addFiles" prefWidth="60.0" text="Add" />
+            <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFiles" prefWidth="60.0" text="Open" />
+            <Button fx:id="playListButton" mnemonicParsing="false" prefWidth="60.0" text="PlayList" />
             </children>
          <BorderPane.margin>
             <Insets right="5.0" />
          </BorderPane.margin>
         </VBox>
     </left>
-   <right>
-      <VBox spacing="5.0">
+   <padding>
+      <Insets left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <bottom>
+      <VBox fx:id="playListPanel" alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#openFiles" prefWidth="60.0" text="Open" BorderPane.alignment="CENTER" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#openFiles" prefWidth="60.0" text="Add" />
+            <ListView fx:id="trackList" prefHeight="300.0" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </bottom>
+   <right>
+      <VBox prefHeight="80.0">
+         <children>
+            <Slider fx:id="volume" maxHeight="60.0" orientation="VERTICAL" BorderPane.alignment="CENTER" />
          </children>
       </VBox>
    </right>
-   <bottom>
-      <ListView fx:id="trackList" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="5.0" />
-         </BorderPane.margin></ListView>
-   </bottom>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
 </BorderPane>

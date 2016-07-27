@@ -10,12 +10,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Player");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.show();
+        Controller controller = loader.getController();
+        controller.dragFile();
+        primaryStage.setResizable(false);
     }
 
 

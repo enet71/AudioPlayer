@@ -9,11 +9,6 @@ import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.TagException;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Line.Info;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.Port;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,30 +35,6 @@ public class Play implements Runnable, Playable {
     }
 
     public void play(Long pauseLocation) {
-
-        // source = Port.Info.SPEAKER;
-        //        source = Port.Info.LINE_OUT;
-        Info source = Port.Info.HEADPHONE;
-
-        if (AudioSystem.isLineSupported(source)) {
-            try {
-                Port outline = (Port) AudioSystem.getLine(source);
-                outline.open();
-                FloatControl volumeControl = (FloatControl) outline.getControl(FloatControl.Type.VOLUME);
-                System.out.println("       volume: " + volumeControl.getValue());
-                float v = 0.33F;
-                volumeControl.setValue(v);
-                System.out.println("   new volume: " + volumeControl.getValue());
-                v = 0.01F;
-                volumeControl.setValue(v);
-                System.out.println("newest volume: " + volumeControl.getValue());
-            } catch (LineUnavailableException ex) {
-                System.err.println("source not supported");
-                ex.printStackTrace();
-            }
-        }
-
-
         try {
             createStream();
 
@@ -87,6 +58,7 @@ public class Play implements Runnable, Playable {
             e.printStackTrace();
         }
     }
+
 
     public long getSongTotalLength() {
         return songTotalLength;
