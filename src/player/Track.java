@@ -1,6 +1,7 @@
 package player;
 
 public class Track {
+    
     private String name;
     private String time;
     private String path;

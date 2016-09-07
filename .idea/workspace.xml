@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/setting/Load.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/setting/Save.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/setting/Settings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_json.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/setting/settings.json" />
-      <change type="DELETED" beforePath="F:\AudioPlayer\out\production\AudioPlayer\player\Controller.class" afterPath="" />
-      <change type="DELETED" beforePath="F:\AudioPlayer\out\production\AudioPlayer\player\Main.class" afterPath="" />
-      <change type="DELETED" beforePath="F:\AudioPlayer\out\production\AudioPlayer\player\Model.class" afterPath="" />
-      <change type="DELETED" beforePath="F:\AudioPlayer\out\production\AudioPlayer\player\sample.fxml" afterPath="" />
-      <change type="DELETED" beforePath="F:\AudioPlayer\out\production\AudioPlayer\player\style.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AudioPlayer/player/Play.class" afterPath="$PROJECT_DIR$/out/production/AudioPlayer/player/Play.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AudioPlayer/player/Player.class" afterPath="$PROJECT_DIR$/out/production/AudioPlayer/player/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AudioPlayer.iml" afterPath="$PROJECT_DIR$/AudioPlayer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/Play.java" afterPath="$PROJECT_DIR$/src/player/Play.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/Player.java" afterPath="$PROJECT_DIR$/src/player/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="F:\AudioPlayer\src\player\Controller.java" afterPath="$PROJECT_DIR$/src/window/Controller.java" />
-      <change type="MOVED" beforePath="F:\AudioPlayer\src\player\Main.java" afterPath="$PROJECT_DIR$/src/window/Main.java" />
-      <change type="MOVED" beforePath="F:\AudioPlayer\src\player\Model.java" afterPath="$PROJECT_DIR$/src/window/Model.java" />
-      <change type="MOVED" beforePath="F:\AudioPlayer\src\player\sample.fxml" afterPath="$PROJECT_DIR$/src/window/form_1.0.fxml" />
-      <change type="MOVED" beforePath="F:\AudioPlayer\src\player\style.css" afterPath="$PROJECT_DIR$/src/window/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/Playable.java" afterPath="$PROJECT_DIR$/src/player/Playable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/Track.java" afterPath="$PROJECT_DIR$/src/player/Track.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -124,16 +103,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Files.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_73/src.zip!/java/nio/file/Files.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2433" column="39" selection-start-line="2433" selection-start-column="39" selection-end-line="2433" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/setting/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -154,18 +123,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Save.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/setting/Save.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Load.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/setting/Load.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -178,11 +135,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/window/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67695963">
+            <state vertical-scroll-proportion="0.0">
               <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Playable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/player/Playable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Track.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/player/Track.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.121140145">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -244,7 +221,6 @@
         <option value="$PROJECT_DIR$/src/player/styles.css" />
         <option value="$PROJECT_DIR$/src/player/PT.java" />
         <option value="$PROJECT_DIR$/src/player/PlayTest.java" />
-        <option value="$PROJECT_DIR$/src/player/Playable.java" />
         <option value="$PROJECT_DIR$/src/player/Model.java" />
         <option value="$PROJECT_DIR$/lib/JLayer1.0.1/src/javazoom/jl/player/JavaSoundAudioDevice.java" />
         <option value="$PROJECT_DIR$/lib/JLayer1.0.1/jl1.0.1.jar!/javazoom/jl/player/JavaSoundAudioDevice.class" />
@@ -262,7 +238,6 @@
         <option value="$PROJECT_DIR$/src/window/form_1.0.fxml" />
         <option value="$PROJECT_DIR$/src/player/Play.java" />
         <option value="$PROJECT_DIR$/src/player/Player.java" />
-        <option value="$PROJECT_DIR$/src/player/Track.java" />
         <option value="$PROJECT_DIR$/src/setting/Json.java" />
         <option value="$PROJECT_DIR$/src/setting/Test.java" />
         <option value="$PROJECT_DIR$/src/setting/Save.java" />
@@ -271,6 +246,8 @@
         <option value="$PROJECT_DIR$/src/window/Main.java" />
         <option value="$PROJECT_DIR$/src/window/Controller.java" />
         <option value="$PROJECT_DIR$/src/setting/settings.json" />
+        <option value="$PROJECT_DIR$/src/player/Playable.java" />
+        <option value="$PROJECT_DIR$/src/player/Track.java" />
       </list>
     </option>
   </component>
@@ -834,12 +811,12 @@
       <workItem from="1473279431342" duration="2097000" />
       <workItem from="1473281667177" duration="31000" />
       <workItem from="1473281735934" duration="58000" />
-      <workItem from="1473281854158" duration="1569000" />
+      <workItem from="1473281854158" duration="2789000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127462000" />
+    <option name="totallyTimeSpent" value="128682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1196,22 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/player/Playable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/player/Track.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_73/src.zip!/java/nio/file/Files.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1226,17 +1187,6 @@
           <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/player/Play.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#1669#1670#0" expanded="true" />
-            <element signature="e#1707#1708#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1308,8 +1258,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/window/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67695963">
+        <state vertical-scroll-proportion="0.0">
           <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player/Play.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="e#1669#1670#0" expanded="true" />
+            <element signature="e#1707#1708#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player/Playable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player/Track.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.121140145">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
           <folding />
         </state>
       </provider>
