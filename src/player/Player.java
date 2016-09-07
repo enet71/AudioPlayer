@@ -5,10 +5,9 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Port;
 
-class Player {
+public class Player {
     private static String path;
     private static Play play;
-    private static Long pauseValue;
     private static boolean isPlaying = false;
     private static int length;
     private static FloatControl volumeControl;
@@ -17,21 +16,13 @@ class Player {
         openVolume();
     }
 
-    static void play() {
+    public static void play() {
         isPlaying = true;
         Thread thread = new Thread(play);
         thread.start();
     }
 
-    static void play(String path) {
-        play(path, 0);
-    }
-
-    static void play(int value) {
-        play(path, value);
-    }
-
-    static void play(String path, int value) {
+    public static void play(String path) {
         if (!isPlaying) {
             newTrack(path);
             play();
@@ -40,42 +31,44 @@ class Player {
         }
     }
 
-    static void newTrack(String path) {
+    public static void newTrack(String path) {
         play = new Play(path);
         Player.path = path;
         length = play.getLength();
     }
 
-    static void stop() {
+    public static void stop() {
         pause();
         newTrack(path);
     }
 
-    static void pause() {
+    public static void pause() {
         if (isPlaying) {
             play.pause();
             isPlaying = false;
         }
     }
 
-    static void slide(int value) {
+    public static void slide(int value) {
         play.slide(value);
-        play();
+        if (isPlaying) {
+            play();
+        }
     }
 
-    static int getLength() {
+    public static int getLength() {
         return length;
     }
 
-    static double getTimeValue() {
+    public static double getTimeValue() {
         return play.getTimeValue();
     }
 
-    static void setVolume(Float v) {
+    public static void setVolume(Float v) {
         volumeControl.setValue(v / 100);
     }
 
-    static float getVolume() {
+    public static float getVolume() {
         return volumeControl.getValue()*100;
     }
 

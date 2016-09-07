@@ -1,4 +1,6 @@
-package player;
+package window;
+
+import player.Player;
 
 public class Model {
     public static String getTime(double time) {

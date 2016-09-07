@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 public class Play implements Runnable, Playable {
     private AdvancedPlayer playMP3;
     private long songTotalLength;
-    private InputStream fileInputStream;
     private BufferedInputStream bufferedInputStream;
     private String path;
     private long pauseLocation = 0;
@@ -31,16 +30,10 @@ public class Play implements Runnable, Playable {
     }
 
     public void play() {
-        play(pauseLocation);
-    }
-
-    public void play(Long pauseLocation) {
         try {
             createStream();
-
             playMP3 = new AdvancedPlayer(bufferedInputStream);
             playMP3.play();
-
         } catch (JavaLayerException e) {
             e.printStackTrace();
         }
@@ -50,7 +43,7 @@ public class Play implements Runnable, Playable {
     private void createStream() {
         try {
             file = Paths.get(path);
-            fileInputStream = Files.newInputStream(file);
+            InputStream fileInputStream = Files.newInputStream(file);
             bufferedInputStream = new BufferedInputStream(fileInputStream);
             songTotalLength = bufferedInputStream.available();
             bufferedInputStream.skip(pauseLocation);
@@ -58,7 +51,6 @@ public class Play implements Runnable, Playable {
             e.printStackTrace();
         }
     }
-
 
     public long getSongTotalLength() {
         return songTotalLength;
@@ -82,7 +74,7 @@ public class Play implements Runnable, Playable {
         try {
             pauseLocation = songTotalLength - bufferedInputStream.available();
         } catch (IOException e) {
-            System.out.println("Error pause");
+            e.printStackTrace();
         } finally {
             playMP3.close();
         }
@@ -111,6 +103,6 @@ public class Play implements Runnable, Playable {
 
     @Override
     public void run() {
-        play(pauseLocation);
+        play();
     }
 }

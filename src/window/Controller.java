@@ -1,6 +1,8 @@
-package player;
+package window;
 
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,15 +20,25 @@ import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.TagException;
+import player.Playable;
+import player.Player;
+import player.Track;
+import setting.Save;
+import setting.Settings;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable, Playable {
+    @FXML
+    private Button shuffleButton;
+    @FXML
+    private Button repeatButton;
     @FXML
     private BorderPane mainWindow;
     @FXML
@@ -35,10 +47,6 @@ public class Controller implements Initializable, Playable {
     private Slider volume;
     @FXML
     private Button prevButton;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button openButton;
     @FXML
     private Button playListButton;
     @FXML
@@ -62,28 +70,27 @@ public class Controller implements Initializable, Playable {
 
     private Boolean isPlaying = false;
     private Boolean isSliderPressing = false;
-    private AnimationTimer animationTimer;
     private Timeline timeline;
-    private ArrayList<Track> tracks;
+    private List<Track> tracks = new ArrayList<>();
     private int trackIndex;
     private int trackSelectPoPMenu;
     private int prevSelect;
     private boolean openTrackList = true;
     private ContextMenu contextMenu;
-
+    private short repeat = 0;
 
     @FXML
     public void play() {
-        if (!isPlaying) {
+        if (!isPlaying && tracks.size() > 0) {
             Player.play();
             isPlaying = true;
             playButton.setText("Pause");
             timeline.play();
+            setColorList(trackIndex);
+            fullTime.setText(Model.getValueTime(100));
         } else {
             pause();
         }
-        setColorList(trackIndex);
-        fullTime.setText(Model.getValueTime(100));
     }
 
     @FXML
@@ -115,28 +122,33 @@ public class Controller implements Initializable, Playable {
     }
 
 
+    /**
+     * Action on slider dragged
+     */
     @FXML
     private void slide() {
-        slider.setOnMousePressed(event -> {
-            isSliderPressing = true;
-        });
+        slider.setOnMousePressed(event -> isSliderPressing = true);
 
         slider.setOnMouseDragged(event -> progressBar.setProgress(slider.getValue() / 100));
 
         slider.setOnMouseReleased((MouseEvent event) -> {
-            if (isPlaying) {
-                Player.slide((int) slider.getValue());
-            }
+            Player.slide((int) slider.getValue());
             isSliderPressing = false;
             progressBar.setProgress(slider.getValue() / 100);
         });
     }
 
+    /**
+     * Next track
+     */
     @FXML
     private void next() {
         listPlay(++trackIndex);
     }
 
+    /**
+     * Previous track
+     */
     @FXML
     private void prev() {
         listPlay(--trackIndex);
@@ -149,19 +161,32 @@ public class Controller implements Initializable, Playable {
         listAction();
         setVolume();
         volume.setValue(Player.getVolume());
+        resizePlaylist();
+        createTimeLine();
+    }
 
+    /**
+     * Show/hide playlist
+     */
+    @FXML
+    private void resizePlaylist() {
         playListButton.setOnMouseClicked(event -> {
             if (openTrackList) {
-                mainWindow.getScene().getWindow().setHeight(135);
+                mainWindow.getScene().getWindow().setHeight(155);
                 trackList.setPrefHeight(0);
                 openTrackList = false;
             } else {
-                mainWindow.getScene().getWindow().setHeight(445);
+                mainWindow.getScene().getWindow().setHeight(465);
                 trackList.setPrefHeight(300);
                 openTrackList = true;
             }
         });
+    }
 
+    /**
+     * Creates a timeline that updates time/slider
+     */
+    private void createTimeLine() {
         timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
             time.setText(Model.getValueTime(Player.getTimeValue()));
             if (!isSliderPressing) {
@@ -169,14 +194,24 @@ public class Controller implements Initializable, Playable {
                 updateProgressBar();
             }
             if (Player.getTimeValue() == 100) {
-                listPlay(++trackIndex);
+                if (repeat == 2) {
+                    stop();
+                    play();
+                } else {
+                    next();
+                }
             }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
-
     }
 
+    private void updateProgressBar() {
+        progressBar.setProgress((Player.getTimeValue() + 1) / 100);
+    }
 
+    /**
+     * Drag files to the playlist
+     */
     public void dragFile() {
         mainWindow.getScene().setOnDragOver(event -> {
             Dragboard db = event.getDragboard();
@@ -202,21 +237,25 @@ public class Controller implements Initializable, Playable {
         });
     }
 
-    private void updateProgressBar() {
-        progressBar.setProgress((Player.getTimeValue() + 1) / 100);
-    }
-
     @FXML
     private void addFiles() {
         FileChooser fileChooser = new FileChooser();
-        List<File> list = fileChooser.showOpenMultipleDialog(time.getScene().getWindow());
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("mp3", "*.mp3")
+        );
 
+        File file = new File(Settings.FOLDERPATH);
+        if (file.exists()) {
+            fileChooser.setInitialDirectory(file);
+        }
+
+        List<File> list = fileChooser.showOpenMultipleDialog(time.getScene().getWindow());
         if (list != null) {
-            for (File file : list) {
-                addToList(file);
-            }
+            list.forEach(this::addToList);
             addToListView();
             listPlay(trackIndex, false);
+            Settings.FOLDERPATH = list.get(0).getParent();
+            Save.save();
         }
     }
 
@@ -259,20 +298,27 @@ public class Controller implements Initializable, Playable {
             }
             if (event.getButton() == MouseButton.SECONDARY) {
                 contextMenu.hide();
-                contextMenu.show(trackList, event.getScreenX(), event.getScreenY());
+                if (trackList.getSelectionModel().getSelectedIndex() > -1) {
+                    contextMenu.show(trackList, event.getScreenX(), event.getScreenY());
+                }
             }
         });
     }
 
 
     private void listPlay(int index) {
-        listPlay(index, true);
+        if (tracks.size() > 0) {
+            listPlay(index, true);
+        }
     }
 
     private void listPlay(int index, boolean play) {
         stop();
         if (index < 0) {
             trackIndex = tracks.size() - 1;
+        } else if (index > tracks.size() - 1 && repeat == 0) {
+            play = false;
+            trackIndex = 0;
         } else if (index > tracks.size() - 1) {
             trackIndex = 0;
         } else {
@@ -294,6 +340,11 @@ public class Controller implements Initializable, Playable {
     private void setVolume() {
         volume.valueProperty().addListener((observable, oldValue, newValue) -> {
             Player.setVolume(newValue.floatValue());
+        });
+
+
+        volume.valueProperty().addListener((observable, oldValue, newValue) -> {
+
         });
     }
 
@@ -320,7 +371,28 @@ public class Controller implements Initializable, Playable {
         prevSelect = n;
     }
 
-    private void setText(String string) {
+    @FXML
+    private void repeat() {
+        if (repeat == 0) {
+            repeat++;
+            repeatButton.setText("R:list");
+        } else if (repeat == 1) {
+            repeat++;
+            repeatButton.setText("R:file");
+        } else if (repeat == 2) {
+            repeat = 0;
+            repeatButton.setText("R:off");
+        }
+    }
+
+    @FXML
+    private void shuffle() {
+        Collections.shuffle(tracks);
+        addToListView();
+    }
+
+    //FIXME
+    /*private void setText(String string) {
         name.setText(string);
         TranslateTransition transTransition = new TranslateTransition(new Duration(5000));
         transTransition.setNode(name);
@@ -328,5 +400,5 @@ public class Controller implements Initializable, Playable {
         transTransition.setAutoReverse(true);
         transTransition.setCycleCount(5);
         transTransition.play();
-    }
+    }*/
 }

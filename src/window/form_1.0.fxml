@@ -5,8 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="player.Controller">
+<BorderPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="window.Controller">
     <center>
       <VBox prefHeight="80.0">
          <children>
@@ -47,25 +46,25 @@
     <left>
         <VBox prefHeight="90.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addFiles" prefWidth="60.0" text="Add" />
-            <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFiles" prefWidth="60.0" text="Open" />
-            <Button fx:id="playListButton" mnemonicParsing="false" prefWidth="60.0" text="PlayList" />
+                <Button fx:id="playListButton" mnemonicParsing="false" prefWidth="60.0" text="PlayList" />
+                <Button fx:id="repeatButton" mnemonicParsing="false" onAction="#repeat" prefWidth="60.0" text="R:off" />
+                <Button fx:id="shuffleButton" mnemonicParsing="false" onAction="#shuffle" prefWidth="60.0" text="Shuffle" />
             </children>
          <BorderPane.margin>
             <Insets right="5.0" />
          </BorderPane.margin>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
         </VBox>
     </left>
-   <padding>
-      <Insets left="5.0" right="5.0" top="5.0" />
-   </padding>
    <bottom>
       <VBox fx:id="playListPanel" alignment="CENTER">
          <children>
             <ListView fx:id="trackList" prefHeight="300.0" />
          </children>
          <padding>
-            <Insets bottom="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
    </bottom>
@@ -74,6 +73,25 @@
          <children>
             <Slider fx:id="volume" maxHeight="60.0" orientation="VERTICAL" BorderPane.alignment="CENTER" />
          </children>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
       </VBox>
    </right>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#addFiles" text="Add" />
+                  <MenuItem mnemonicParsing="false" onAction="#openFiles" text="Open" />
+              <MenuItem mnemonicParsing="false" text="Exit" />
+            </items>
+          </Menu>
+        </menus>
+         <BorderPane.margin>
+            <Insets bottom="5.0" />
+         </BorderPane.margin>
+      </MenuBar>
+   </top>
 </BorderPane>

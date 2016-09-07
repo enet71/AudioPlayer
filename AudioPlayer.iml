@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jaudiotagger-2.0.4" level="project" />
     <orderEntry type="library" name="jl1.0.1" level="project" />
+    <orderEntry type="library" name="org.json" level="project" />
   </component>
 </module>
